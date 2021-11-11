@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@master
 
       # 安装依赖
-      - run: npm ci
+      - run: npm install
 
       # 打包
-      - run: npm run build
+      - run: npm run docs:build
 
       # 部署
       - name: Deploy
@@ -24,4 +24,4 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.DEPLOY_KEY }}
           PUBLISH_BRANCH: gh-pages
           # 生成文件的目录
-          PUBLISH_DIR: ./build
+          PUBLISH_DIR: ./docs-dist
