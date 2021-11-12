@@ -8,8 +8,11 @@ title: 基于umi区块的实践
 
 ## 实现
 
+扩展公司内部脚手架命令，并延伸出一个区块仓库。
+
 根据公司内部开发习惯以及脚手架规范，将重复的区块分成三类，分别是`hooks`，`components`，`utils`。
-开发环境主要采用(dumi)[https://d.umijs.org/zh-CN]进行搭建
+
+区块的开发环境主要采用[dumi](https://d.umijs.org/zh-CN)进行搭建
 
 其中主要的实现步骤如下：
 
