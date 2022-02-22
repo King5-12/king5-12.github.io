@@ -521,4 +521,4 @@ this.hooks = {
 };
 ```
 
-> 其中很多具体的细节实现，还没有了解完全，当决定要实现一个 plugins，主要从各种钩子中拿到自己所需要的 compiler 和 compilation 中的信息，在进行对其重新赋值。
+> 其中很多具体的细节实现，还没有了解完全，当决定要实现一个 plugins，主要从各种钩子中拿到自己所需要的 compiler 和 compilation 中的信息，在进行对其重新赋值。类似 webpack 的 loader 就是通过 loaderPlugins 实现功能流程。
