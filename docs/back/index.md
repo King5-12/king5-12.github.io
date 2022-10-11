@@ -89,4 +89,101 @@ age.String()
 - 如果使用一个值类型变量调用指针类型接受者的方法，Go语言编译器会自动帮我们取指针调用。相反也会处理。
 
 ### 范围（range）
+
+range 关键字用于for循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素。在数组和切片中它返回元素的索引值，在集合中返回 key-value 对的 key 值。
 ### Map
+```go
+package main
+
+import "fmt"
+
+func main() {   
+   /* 创建 map */
+   countryCapitalMap := map[string] string {"France":"Paris","Italy":"Rome","Japan":"Tokyo","India":"New Delhi"}
+   
+   fmt.Println("原始 map")   
+   
+   /* 打印 map */
+   for country := range countryCapitalMap {
+      fmt.Println("Capital of",country,"is",countryCapitalMap[country])
+   }
+   
+   /* 删除元素 */
+   delete(countryCapitalMap,"France");
+   fmt.Println("Entry for France is deleted")  
+   
+   fmt.Println("删除元素后 map")   
+   
+   /* 打印 map */
+   for country := range countryCapitalMap {
+      fmt.Println("Capital of",country,"is",countryCapitalMap[country])
+   }
+}
+```
+
+### 反射
+1. 大量使用反射的代码通常会变得难以理解
+2. 反射的性能低下，基于反射的代码会比正常的代码运行速度慢一到两个数量级
+
+### 并发
+
+并发：同一时间段内执行多个任务（你早上在编程狮学习Java和Python）
+
+并行：同一时刻执行多个任务（你和你的网友早上都在使用编程狮学习Go）
+
+Go语言中的并发程序主要是通过基于CSP（communicating sequential processes）的goroutine和channel来实现，当然也支持使用传统的多线程共享内存的并发方式
+
+### goruntine
+
+```go
+package main
+
+import (
+  "fmt"
+  "time"
+  "sync"
+)
+
+var wg sync.WaitGroup
+func hello(){
+  fmt.Println("hello")
+	defer wg.Done()//把计算器-1
+}
+
+func main(){
+	wg.Add(1)//把计数器+1
+	go hello()
+	fmt.Println("hello world！")
+	wg.Wait()
+	// time.Sleep(time.Second)
+}
+```
+
+### channel
+```go
+import (
+	"fmt"
+	"time"
+)
+func main(){
+  a := make(chan int, 1)
+	go receive(a)
+	a <- 10
+	fmt.Println("发送成功1")
+	a <- 20
+	fmt.Println("发送成功2")
+	a <- 30
+	fmt.Println("发送成功3")
+}
+
+
+func receive(x chan int) {
+	ret := <-x
+	time.Sleep(time.Second)
+	fmt.Println("接收成功1", ret)
+	ret1 := <-x
+	fmt.Println("接收成功2", ret1)
+	ret2 := <-x
+	fmt.Println("接收成功3", ret2)
+}
+```
