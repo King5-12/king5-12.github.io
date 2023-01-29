@@ -187,3 +187,56 @@ func receive(x chan int) {
 	fmt.Println("接收成功3", ret2)
 }
 ```
+
+### 反射
+
+任何接口都由两部分组成： 接口的具体类型，以及具体类型对应的值。
+
+reflect.Value 可以通过函数 reflect.ValueOf 获取
+
+```go
+	p := person{Name: "myName", Age: 18}
+	ppv := reflect.ValueOf(&p)
+	pv := reflect.ValueOf(p)
+	ppv.Elem().Field(0).SetString("yourName")
+
+	fmt.Println(ppv.Kind()) // ptr
+	fmt.Println(pv.Kind())  // struct
+```
+
+### go中底层类型
+
+```go
+type Kind unit
+const (
+   Invalid Kind = iota
+   Bool
+   Int
+   Int8
+   Int16
+   Int32
+   Int64
+   Uint
+   Uint8
+   Uint16
+   Uint32
+   Uint64
+   Uintptr
+   Float32
+   Float64
+   Complex64
+   Complex128
+   Array
+   Chan
+   Func
+   Interface
+   Map
+   Ptr
+   Slice
+   String
+   Struct
+   UnsafePointer
+)
+```
+
+
