@@ -252,7 +252,6 @@ class Director {
 function clientCode(director: Director) {
     const builder = new ConcreteBuilder1();
     director.setBuilder(builder);
-
     console.log('Standard basic product:');
     director.buildMinimalViableProduct();
     builder.getProduct().listParts();
